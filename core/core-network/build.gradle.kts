@@ -6,7 +6,7 @@ plugins {
 }
 
 android {
-    namespace = "com.example.core_db"
+    namespace = "com.example.core_network"
     compileSdk = 36
 
     defaultConfig {
@@ -43,9 +43,12 @@ dependencies {
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
 
-    implementation(libs.androidx.room.runtime)
-    implementation(libs.androidx.room.ktx)
-    ksp(libs.androidx.room.compiler)
+    implementation(libs.squareup.retrofit)
+    implementation(libs.squareup.retrofit.gson)
     implementation(libs.hilt.android)
     ksp(libs.hilt.compiler)
+    debugImplementation(libs.chucker.debug)
+    releaseImplementation(libs.chucker.release)
+    implementation(libs.squareup.okhttp)
+    implementation(libs.squareup.okhttp.logging)
 }

@@ -22,3 +22,5 @@ dependencyResolutionManagement {
 rootProject.name = "Pokemon"
 include(":app")
 include(":core:core-db")
+include(":core:core-network")
+include(":feature:auth")
