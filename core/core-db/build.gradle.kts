@@ -6,7 +6,7 @@ plugins {
 }
 
 android {
-    namespace = "com.example.core.db"
+    namespace = "com.example.core_db"
     compileSdk = 36
 
     defaultConfig {
@@ -48,4 +48,7 @@ dependencies {
     ksp(libs.androidx.room.compiler)
     implementation(libs.hilt.android)
     ksp(libs.hilt.compiler)
+    implementation(libs.hilt.navigation.compose)
+    implementation(libs.androidx.paging.runtime)
+    implementation(libs.androidx.paging.compose)
 }
