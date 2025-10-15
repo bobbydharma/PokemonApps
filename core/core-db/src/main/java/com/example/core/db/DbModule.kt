@@ -19,4 +19,7 @@ object DbModule {
 
     @Provides
     fun providePokemonDao(db: AppDatabase) = db.pokemonDao()
+
+    @Provides
+    fun provideUserDao(db: AppDatabase) = db.userDao()
 }

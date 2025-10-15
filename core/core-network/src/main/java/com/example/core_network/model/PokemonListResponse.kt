@@ -4,6 +4,9 @@ import androidx.annotation.Keep
 
 @Keep
 data class PokemonListResponse(
+    val count: Int,
+    val next: String?,
+    val previous: String?,
     val results: List<PokemonResult>?
 )
 
@@ -11,21 +14,4 @@ data class PokemonListResponse(
 data class PokemonResult(
     val name: String?,
     val url: String?
-)
-
-@Keep
-data class PokemonDetailResponse(
-    val id: Int?,
-    val name: String?,
-    val abilities: List<AbilityWrapper>?
-)
-
-@Keep
-data class AbilityWrapper(
-    val ability: Ability?
-)
-
-@Keep
-data class Ability(
-    val name: String?
 )

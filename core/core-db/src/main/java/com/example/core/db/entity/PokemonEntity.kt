@@ -6,6 +6,6 @@ import androidx.room.PrimaryKey
 @Entity(tableName = "pokemons")
 data class PokemonEntity(
     @PrimaryKey val name: String,
-    val id: Int,
-    val abilitiesJson: String
+    val imageUrl: String,
+    val id: Int
 )
