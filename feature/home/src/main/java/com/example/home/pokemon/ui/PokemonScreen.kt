@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.GridItemSpan
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.lazy.grid.rememberLazyGridState
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
@@ -40,6 +41,7 @@ fun PokemonScreen(
 ) {
     val pokemonItems = viewModel.pokemonPagingFlow.collectAsLazyPagingItems()
     var searchQuery by remember { mutableStateOf("") }
+    val gridState = rememberLazyGridState()
 
     Column(modifier = Modifier.fillMaxSize()) {
         // 🔍 Search Bar
@@ -58,6 +60,7 @@ fun PokemonScreen(
 
         Box(modifier = Modifier.fillMaxSize()) {
             LazyVerticalGrid(
+                state = gridState,
                 columns = GridCells.Fixed(2),
                 contentPadding = PaddingValues(8.dp)
             ) {

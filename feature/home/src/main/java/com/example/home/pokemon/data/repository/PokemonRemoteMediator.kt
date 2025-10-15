@@ -19,24 +19,25 @@ class PokemonRemoteMediator(
 ) : RemoteMediator<Int, PokemonEntity>() {
 
     private val pokemonDao = db.pokemonDao()
+    private var currentOffset = 0
 
     override suspend fun load(
         loadType: LoadType,
         state: PagingState<Int, PokemonEntity>
     ): MediatorResult {
         try {
-            // Tentukan halaman berdasarkan load type
             val offset = when (loadType) {
-                LoadType.REFRESH -> 0
-                LoadType.PREPEND -> return MediatorResult.Success(endOfPaginationReached = true)
-                LoadType.APPEND -> {
-                    val currentCount = pokemonDao.countPokemons()
-                    currentCount
+                LoadType.REFRESH -> {
+                    currentOffset = 0
+                    0
                 }
+
+                LoadType.PREPEND -> return MediatorResult.Success(endOfPaginationReached = true)
+                LoadType.APPEND -> currentOffset
             }
 
             val limit = state.config.pageSize
-            delay(800)
+            delay(3000)
             val response = api.getListPokemon(limit = limit, offset = offset)
             val results = response.results ?: emptyList()
 
@@ -50,6 +51,10 @@ class PokemonRemoteMediator(
             }
 
             val endOfPaginationReached = results.isEmpty()
+            if (!endOfPaginationReached) {
+                currentOffset += limit
+            }
+
             return MediatorResult.Success(endOfPaginationReached = endOfPaginationReached)
         } catch (e: IOException) {
             return MediatorResult.Error(e)
