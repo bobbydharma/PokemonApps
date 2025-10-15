@@ -1,5 +1,6 @@
 package com.example.home.pokemon.di
 
+import com.example.core.db.AppDatabase
 import com.example.core_network.PokeApiService
 import com.example.home.pokemon.data.repository.PokemonRepositoryImpl
 import com.example.home.pokemon.domain.repository.PokemonRepository
@@ -14,7 +15,7 @@ import javax.inject.Singleton
 object PokemonListModule {
     @Provides
     @Singleton
-    fun providePokemonRepository(api: PokeApiService): PokemonRepository {
-        return PokemonRepositoryImpl(api)
+    fun providePokemonRepository(api: PokeApiService, db: AppDatabase): PokemonRepository {
+        return PokemonRepositoryImpl(api, db)
     }
 }
