@@ -28,9 +28,9 @@ class PokemonRepositoryImpl @Inject constructor(
             ).flow
         } else {
             Pager(
-                config = PagingConfig(pageSize = 10, initialLoadSize = 10),
+                config = PagingConfig(pageSize = 10, initialLoadSize = 10, prefetchDistance = 5),
                 remoteMediator = PokemonRemoteMediator(api, db),
-                pagingSourceFactory = pagingSourceFactory
+                pagingSourceFactory = pagingSourceFactory,
             ).flow.map { pagingData ->
                 pagingData.map { it.toDomain() }
             }
