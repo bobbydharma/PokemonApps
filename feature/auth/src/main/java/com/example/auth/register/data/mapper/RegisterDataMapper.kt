@@ -5,7 +5,10 @@ import com.example.core.db.entity.UserEntity
 
 fun UserEntity.toDomainModel(): UserDomainModel =
     UserDomainModel(
-        username,
-        password,
-        active
+        email = email,
+        passwordHash =password,
+        active = active,
+        name = name,
+        address = address,
+        gender = gender
     )

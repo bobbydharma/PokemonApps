@@ -11,8 +11,11 @@ class LoginUseCase @Inject constructor(
     suspend operator fun invoke(user: UserRequest) {
         repo.login(
             UserEntity(
-                username = user.username,
+                email = user.email,
                 password = user.password,
+                name = user.name,
+                gender = user.gender,
+                address = user.address,
                 active = true
             )
         )

@@ -1,7 +1,10 @@
 package com.example.auth.register.domain.model
 
 data class UserRequest (
-    val username: String,
-    val password: String,
-    val active: Boolean
+    val name: String = "",
+    val email: String = "",
+    val password: String = "",
+    val gender: String = "",
+    val address: String = "",
+    val active: Boolean = false
 )

@@ -22,4 +22,7 @@ object DbModule {
 
     @Provides
     fun provideUserDao(db: AppDatabase) = db.userDao()
+
+    @Provides
+    fun provideRemoteKeyDao(db: AppDatabase) = db.remoteKeysDao()
 }

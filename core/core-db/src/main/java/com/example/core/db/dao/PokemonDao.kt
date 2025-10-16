@@ -13,7 +13,7 @@ interface PokemonDao {
     @Query("SELECT * FROM pokemons ORDER BY id ASC")
     fun getPokemons(): PagingSource<Int, PokemonEntity>
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insertAll(items: List<PokemonEntity>)
 
     @Query("SELECT * FROM pokemons WHERE name = :name LIMIT 1")

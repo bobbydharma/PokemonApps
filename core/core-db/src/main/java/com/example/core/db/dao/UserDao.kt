@@ -11,11 +11,11 @@ interface UserDao {
     @Insert(onConflict = OnConflictStrategy.ABORT)
     suspend fun insert(user: UserEntity): Unit
 
-    @Query("SELECT * FROM users WHERE username = :username LIMIT 1")
-    suspend fun getByUsername(username: String): UserEntity?
+    @Query("SELECT * FROM users WHERE email = :email LIMIT 1")
+    suspend fun getByUsername(email: String): UserEntity?
 
-    @Query("UPDATE users SET active = :active WHERE username = :username")
-    suspend fun setActive(username: String, active: Boolean)
+    @Query("UPDATE users SET active = :active WHERE email = :email")
+    suspend fun setActive(email: String, active: Boolean)
 
     @Query("SELECT * FROM users WHERE active = 1 LIMIT 1")
     suspend fun getActiveUser(): UserEntity?

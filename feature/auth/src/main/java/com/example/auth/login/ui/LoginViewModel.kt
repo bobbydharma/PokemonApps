@@ -23,7 +23,7 @@ class LoginViewModel @Inject constructor(
     fun login(email: String, password: String) {
         viewModelScope.launch {
             val req = UserRequest(
-                username = email,
+                email = email,
                 password = password,
                 active = false
             )

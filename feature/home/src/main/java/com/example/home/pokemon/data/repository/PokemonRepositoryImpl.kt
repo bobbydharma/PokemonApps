@@ -4,11 +4,14 @@ import androidx.paging.ExperimentalPagingApi
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
+import androidx.paging.map
 import com.example.core.db.AppDatabase
 import com.example.core_network.PokeApiService
+import com.example.home.pokemon.data.mapper.toDomain
 import com.example.home.pokemon.domain.model.PokemonDomainModel
 import com.example.home.pokemon.domain.repository.PokemonRepository
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
 class PokemonRepositoryImpl @Inject constructor(
@@ -24,22 +27,22 @@ class PokemonRepositoryImpl @Inject constructor(
                 pagingSourceFactory = { SearchPokemonPagingSource(api, query) }
             ).flow
         } else {
-//            Pager(
-//                config = PagingConfig(pageSize = 10, initialLoadSize = 20, enablePlaceholders = false),
-//                remoteMediator = PokemonRemoteMediator(api, db),
-//                pagingSourceFactory = pagingSourceFactory,
-//            ).flow.map { pagingData ->
-//                pagingData.map { it.toDomain() }
-//            }
-
             Pager(
-                config = PagingConfig(
-                    pageSize = 10,
-                    initialLoadSize = 20,
-                    enablePlaceholders = false
-                ),
-                pagingSourceFactory = { PokemonPagingSource(api) },
-            ).flow
+                config = PagingConfig(pageSize = 10, initialLoadSize = 20, enablePlaceholders = false),
+                remoteMediator = PokemonRemoteMediator(api, db),
+                pagingSourceFactory = pagingSourceFactory,
+            ).flow.map { pagingData ->
+                pagingData.map { it.toDomain() }
+            }
+
+//            Pager(
+//                config = PagingConfig(
+//                    pageSize = 10,
+//                    initialLoadSize = 20,
+//                    enablePlaceholders = false
+//                ),
+//                pagingSourceFactory = { PokemonPagingSource(api) },
+//            ).flow
         }
 
     }

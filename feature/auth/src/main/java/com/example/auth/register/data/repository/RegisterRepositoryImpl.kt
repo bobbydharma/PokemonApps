@@ -11,7 +11,7 @@ class RegisterRepositoryImpl @Inject constructor(
 ): RegisterRepository {
     override suspend fun register(user: UserEntity) {
         return safeApiCall {
-            val existingUser = dao.getByUsername(user.username)
+            val existingUser = dao.getByUsername(user.email)
             if (existingUser != null) {
                 throw Exception("Email already registered")
             }

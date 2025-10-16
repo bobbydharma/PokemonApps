@@ -20,11 +20,24 @@ class RegisterViewModel @Inject constructor(
         MutableStateFlow<DataState<Unit>>(DataState.Empty)
     val registerData = _registerData.asStateFlow()
 
-    fun postRegister(email: String, password: String) {
+    fun resetState() {
+        _registerData.value = DataState.Empty
+    }
+
+    fun postRegister(
+        name: String,
+        email: String,
+        password: String,
+        gender: String,
+        address: String
+    ) {
         viewModelScope.launch {
             val req = UserRequest(
-                username = email,
+                name = name,
+                email = email,
                 password = password,
+                gender= gender,
+                address = address,
                 active = false
             )
             _registerData.asMutableStateFlow {

@@ -9,8 +9,8 @@ class LoginRepositoryImpl @Inject constructor(
     private val dao: UserDao
 ) : LoginRepository {
     override suspend fun login(user: UserEntity) {
-        val existingUser = dao.getByUsername(user.username)
-        dao.setActive(user.username, true)
+        val existingUser = dao.getByUsername(user.email)
+        dao.setActive(user.email, true)
         if (existingUser != null) {
             if (existingUser.password != user.password){
                 throw Exception("Email atau Password salah")
